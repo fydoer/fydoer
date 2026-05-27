@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>fydoer – travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --black:#0a0a0a; --white:#f0f0f0; --pink:#ff3fa4; --blue:#3f8fff; --gray:#1a1a1a; --mid:#2a2a2a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--black); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:flex-end; gap:2.5rem; padding:1.8rem 4rem;
+  }
+  nav a { color:var(--white); text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:lowercase; opacity:0.4; transition:opacity 0.2s; }
+  nav a:hover, nav a.active { opacity:1; }
+
+  .page-header { padding:12rem 4rem 4rem; max-width:1100px; margin:0 auto; }
+  .page-title {
+    font-family:'Oswald',sans-serif;
+    font-size:clamp(4rem,10vw,9rem); line-height:1;
+    text-transform:lowercase; color:var(--white); margin-bottom:0.5rem;
+  }
+  .page-subtitle { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:#777; font-weight:300; }
+
+  .country-section { padding:4rem 4rem 0; max-width:1100px; margin:0 auto; }
+
+  .country-header { display:flex; align-items:center; gap:1.5rem; margin-bottom:2rem; }
+  .country-flag { font-size:1.8rem; }
+  .country-name {
+    font-family:'Oswald',sans-serif;
+    font-size:2.2rem; text-transform:lowercase; color:var(--white); letter-spacing:0.02em;
+  }
+  .country-line { flex:1; height:1px; background:var(--mid); }
+
+  .videos-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem;
+    margin-bottom:5rem;
+  }
+  .video-card {
+    background:var(--gray); border-radius:10px; border:1px solid var(--mid);
+    overflow:hidden; cursor:pointer; position:relative;
+    aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.7rem;
+    transition:border-color 0.25s, transform 0.25s;
+  }
+  .video-card:hover { border-color:var(--pink); transform:translateY(-3px); }
+  .video-card video, .video-card iframe { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:none; }
+  .video-placeholder { display:flex; flex-direction:column; align-items:center; gap:0.6rem; z-index:1; pointer-events:none; }
+  .play-btn {
+    width:48px; height:48px; border-radius:50%;
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+    display:flex; align-items:center; justify-content:center; font-size:1rem; padding-left:3px;
+  }
+  .video-label { font-size:0.65rem; letter-spacing:0.15em; text-transform:lowercase; color:#555; }
+
+  .more-to-come {
+    text-align:center; padding:5rem 0 6rem;
+    font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:#2a2a2a;
+  }
+  .more-to-come span {
+    background:linear-gradient(90deg,var(--pink),var(--blue));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  @media(max-width:700px) {
+    .page-header, .country-section { padding-left:1.8rem; padding-right:1.8rem; }
+    nav { padding:1.2rem 1.8rem; gap:1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="travels.html" class="active">travels</a>
+  <a href="music.html">music</a>
+  <a href="contact.html">contact</a>
+</nav>
+
+<div class="page-header fade-in">
+  <h1 class="page-title">travels</h1>
+  <p class="page-subtitle">places I've been · moments I've kept</p>
+</div>
+
+<div class="country-section fade-in">
+  <div class="country-header">
+    <span class="country-flag">🇫🇷</span>
+    <span class="country-name">france</span>
+    <div class="country-line"></div>
+  </div>
+  <div class="videos-grid">
+    <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 01</span></div></div>
+    <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 02</span></div></div>
+    <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 03</span></div></div>
+  </div>
+</div>
+
+<div class="country-section fade-in">
+  <div class="country-header">
+    <span class="country-flag">🇺🇿</span>
+    <span class="country-name">uzbekistan</span>
+    <div class="country-line"></div>
+  </div>
+  <div class="videos-grid">
+    <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">uzbekistan vlog 01</span></div></div>
+  </div>
+</div>
+
+<div class="more-to-come fade-in">— <span>more to come</span> —</div>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
