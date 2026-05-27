@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>fydoer – hear me out</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --black:#0a0a0a; --white:#f0f0f0; --pink:#ff3fa4; --blue:#3f8fff; --gray:#1a1a1a; --mid:#2a2a2a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--black); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:flex-end; gap:2.5rem; padding:1.8rem 4rem;
+  }
+  nav a { color:var(--white); text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:lowercase; opacity:0.4; transition:opacity 0.2s; }
+  nav a:hover, nav a.active { opacity:1; }
+
+  .page-header { padding:12rem 4rem 5rem; max-width:1100px; margin:0 auto; }
+  .page-title {
+    font-family:'Oswald',sans-serif;
+    font-size:clamp(4rem,10vw,9rem); line-height:1;
+    text-transform:lowercase; color:var(--white); margin-bottom:0.5rem;
+  }
+  .page-subtitle { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:#777; font-weight:300; }
+
+  .vinyls-container {
+    padding:2rem 4rem 8rem; max-width:1100px; margin:0 auto;
+    display:flex; flex-wrap:wrap; gap:5rem; justify-content:center;
+  }
+
+  .vinyl-card {
+    display:flex; flex-direction:column; align-items:center; gap:1.5rem;
+    cursor:pointer; user-select:none;
+  }
+  .vinyl-outer { position:relative; width:220px; height:220px; }
+
+  .vinyl-disc {
+    width:220px; height:220px; border-radius:50%;
+    background: conic-gradient(
+      #111 0deg,#181818 10deg,#111 20deg,#1c1c1c 30deg,
+      #111 40deg,#181818 50deg,#111 60deg,#1c1c1c 70deg,
+      #111 80deg,#181818 90deg,#111 100deg,#1c1c1c 110deg,
+      #111 120deg,#181818 130deg,#111 140deg,#1c1c1c 150deg,
+      #111 160deg,#181818 170deg,#111 180deg,#1c1c1c 190deg,
+      #111 200deg,#181818 210deg,#111 220deg,#1c1c1c 230deg,
+      #111 240deg,#181818 250deg,#111 260deg,#1c1c1c 270deg,
+      #111 280deg,#181818 290deg,#111 300deg,#1c1c1c 310deg,
+      #111 320deg,#181818 330deg,#111 340deg,#1c1c1c 350deg,#111 360deg
+    );
+    border:2px solid #252525;
+    position:relative;
+    transition:box-shadow 0.4s;
+  }
+  .vinyl-disc.spinning {
+    animation:spin 2.4s linear infinite;
+    box-shadow:0 0 50px rgba(255,63,164,0.2),0 0 100px rgba(63,143,255,0.08);
+  }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+  .vinyl-center {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:82px; height:82px; border-radius:50%;
+    overflow:hidden; border:2px solid #333;
+    background:var(--gray);
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .vinyl-center img { width:100%; height:100%; object-fit:cover; filter:grayscale(20%); }
+  .vinyl-center-placeholder {
+    font-size:0.5rem; letter-spacing:0.1em; text-align:center;
+    color:#444; text-transform:lowercase; padding:0.5rem; line-height:1.4;
+  }
+  .vinyl-hole {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:10px; height:10px; border-radius:50%;
+    background:var(--black); z-index:3;
+  }
+  .needle {
+    position:absolute; top:-8px; right:14px;
+    width:2px; height:32px;
+    background:linear-gradient(to bottom,#666,transparent);
+    transform-origin:top center; transform:rotate(22deg);
+    transition:transform 0.4s ease; border-radius:1px;
+  }
+  .vinyl-card:hover .needle { transform:rotate(10deg); }
+
+  .song-info { text-align:center; }
+  .song-title { font-size:0.85rem; color:var(--white); font-weight:300; margin-bottom:0.3rem; letter-spacing:0.03em; }
+  .song-hint { font-size:0.6rem; letter-spacing:0.2em; text-transform:lowercase; color:#333; }
+  .song-hint.playing { color:var(--pink); }
+
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  @media(max-width:700px) {
+    .page-header { padding-left:1.8rem; padding-right:1.8rem; }
+    .vinyls-container { padding:2rem 1.8rem 6rem; gap:3rem; }
+    nav { padding:1.2rem 1.8rem; gap:1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="travels.html">travels</a>
+  <a href="music.html" class="active">music</a>
+  <a href="contact.html">contact</a>
+</nav>
+
+<div class="page-header fade-in">
+  <h1 class="page-title">hear me out...</h1>
+  <p class="page-subtitle">hover to listen</p>
+</div>
+
+<div class="vinyls-container">
+
+  <div class="vinyl-card fade-in">
+    <div class="vinyl-outer">
+      <div class="vinyl-disc">
+        <div class="vinyl-center">
+          <!-- <img src="photo.jpg" alt="fydoer"/> -->
+          <div class="vinyl-center-placeholder">your<br/>photo</div>
+        </div>
+        <div class="vinyl-hole"></div>
+      </div>
+      <div class="needle"></div>
+    </div>
+    <div class="song-info">
+      <p class="song-title">song title one</p>
+      <p class="song-hint">hover to listen</p>
+    </div>
+    <audio loop><source src="snippets/song1.mp3" type="audio/mpeg"/></audio>
+  </div>
+
+  <div class="vinyl-card fade-in">
+    <div class="vinyl-outer">
+      <div class="vinyl-disc">
+        <div class="vinyl-center">
+          <div class="vinyl-center-placeholder">your<br/>photo</div>
+        </div>
+        <div class="vinyl-hole"></div>
+      </div>
+      <div class="needle"></div>
+    </div>
+    <div class="song-info">
+      <p class="song-title">song title two</p>
+      <p class="song-hint">hover to listen</p>
+    </div>
+    <audio loop><source src="snippets/song2.mp3" type="audio/mpeg"/></audio>
+  </div>
+
+  <div class="vinyl-card fade-in">
+    <div class="vinyl-outer">
+      <div class="vinyl-disc">
+        <div class="vinyl-center">
+          <div class="vinyl-center-placeholder">your<br/>photo</div>
+        </div>
+        <div class="vinyl-hole"></div>
+      </div>
+      <div class="needle"></div>
+    </div>
+    <div class="song-info">
+      <p class="song-title">song title three</p>
+      <p class="song-hint">hover to listen</p>
+    </div>
+    <audio loop><source src="snippets/song3.mp3" type="audio/mpeg"/></audio>
+  </div>
+
+</div>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.vinyl-card').forEach(card => {
+    const disc = card.querySelector('.vinyl-disc');
+    const hint = card.querySelector('.song-hint');
+    const audio = card.querySelector('audio');
+    card.addEventListener('mouseenter', () => {
+      disc.classList.add('spinning');
+      hint.textContent = '♪ playing';
+      hint.classList.add('playing');
+      audio.play().catch(()=>{});
+    });
+    card.addEventListener('mouseleave', () => {
+      disc.classList.remove('spinning');
+      hint.textContent = 'hover to listen';
+      hint.classList.remove('playing');
+      audio.pause(); audio.currentTime=0;
+    });
+  });
+</script>
+</body>
+</html>
