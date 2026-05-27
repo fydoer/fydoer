@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>fydoer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,700&family=Inter:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root { --black:#0a0a0a; --white:#f0f0f0; --pink:#ff3fa4; --blue:#3f8fff; --gray:#1a1a1a; --mid:#2a2a2a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--black); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:flex-end; gap:2.5rem; padding:1.8rem 4rem;
+  }
+  nav a { color:var(--white); text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:lowercase; opacity:0.4; transition:opacity 0.2s; }
+  nav a:hover { opacity:1; }
+
+  #hero {
+    height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:1.6rem;
+  }
+  #hero-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-style:italic; font-weight:700;
+    font-size:clamp(5rem,18vw,14rem);
+    text-transform:lowercase;
+    letter-spacing:0.01em;
+    line-height:1;
+    color:var(--white);
+    user-select:none; cursor:default;
+    transition:color 0.3s;
+    text-align:center;
+  }
+  #hero-name:hover {
+    background:linear-gradient(135deg,var(--pink),var(--blue));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+
+  #keywords {
+    display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+    padding:0 2rem;
+  }
+  .kw { font-size:0.7rem; letter-spacing:0.22em; text-transform:lowercase; color:#666; font-weight:300; }
+  .kw-sep { color:#383838; font-size:0.65rem; }
+
+  #about {
+    min-height:100vh; padding:10rem 4rem 6rem;
+    max-width:1000px; margin:0 auto;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .section-label { font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--pink); margin-bottom:3.5rem; }
+
+  #about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:5rem; align-items:start; }
+
+  .about-text { font-size:1rem; line-height:1.9; color:#888; font-weight:300; }
+  .about-text strong { color:var(--white); font-weight:700; }
+  .tck { color:#aaa; }
+
+  .skills-wrap { display:flex; flex-direction:column; gap:1.2rem; }
+  .skills-label { font-size:0.6rem; letter-spacing:0.25em; text-transform:lowercase; color:var(--blue); opacity:0.6; margin-bottom:0.3rem; }
+  .skill-bubbles { display:flex; flex-wrap:wrap; gap:0.6rem; }
+  .bubble {
+    border:1px solid rgba(63,143,255,0.3); color:var(--blue);
+    font-size:0.72rem; letter-spacing:0.05em;
+    padding:0.45rem 1rem; border-radius:20px;
+    font-weight:300; background:rgba(63,143,255,0.04);
+  }
+
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  @media(max-width:700px) {
+    #about-grid { grid-template-columns:1fr; gap:3rem; }
+    #about { padding:8rem 1.8rem 4rem; }
+    nav { padding:1.2rem 1.8rem; gap:1.5rem; }
+    #keywords { gap:1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="travels.html">travels</a>
+  <a href="music.html">music</a>
+  <a href="contact.html">contact</a>
+</nav>
+
+<section id="hero">
+  <span id="hero-name">fydoer</span>
+  <div id="keywords">
+    <span class="kw">creative creator</span>
+    <span class="kw-sep">·</span>
+    <span class="kw">social butterfly</span>
+    <span class="kw-sep">·</span>
+    <span class="kw">third culture kid</span>
+  </div>
+</section>
+
+<section id="about">
+  <p class="section-label fade-in">ABOUT</p>
+  <div id="about-grid">
+    <div class="fade-in">
+      <p class="about-text">
+        hey — I'm <strong>fydoer</strong>.<br><br>
+        I'm currently studying <strong>[your degree]</strong> at <strong>[your university]</strong>.
+        I sing, I edit videos, I get on planes whenever I can.<br><br>
+        I grew up moving between countries and cultures — never fully from one place,
+        always a little from everywhere.
+        <span class="tck">third culture kid through and through.</span>
+      </p>
+    </div>
+    <div class="fade-in">
+      <div class="skills-wrap">
+        <p class="skills-label">things i do</p>
+        <div class="skill-bubbles">
+          <span class="bubble">singing & songwriting</span>
+          <span class="bubble">video editing</span>
+          <span class="bubble">intercultural communication</span>
+          <span class="bubble">storytelling</span>
+          <span class="bubble">connecting people</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
