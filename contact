@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>fydoer – find me</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root { --black:#0a0a0a; --white:#f0f0f0; --pink:#ff3fa4; --blue:#3f8fff; --gray:#1a1a1a; --mid:#2a2a2a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--black); color:var(--white); font-family:'Inter',sans-serif; min-height:100vh; display:flex; flex-direction:column; }
+
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:flex-end; gap:2.5rem; padding:1.8rem 4rem;
+  }
+  nav a { color:var(--white); text-decoration:none; font-size:0.7rem; letter-spacing:0.2em; text-transform:lowercase; opacity:0.4; transition:opacity 0.2s; }
+  nav a:hover, nav a.active { opacity:1; }
+
+  main { flex:1; display:flex; flex-direction:column; justify-content:center; padding:10rem 4rem 6rem; max-width:900px; margin:0 auto; width:100%; }
+
+  .page-title {
+    font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:700;
+    font-size:clamp(4rem,10vw,9rem); line-height:1;
+    text-transform:lowercase; color:var(--white); margin-bottom:2rem;
+  }
+
+  /* "if you are..." block styled like the hero keywords */
+  .if-you {
+    display:flex; flex-direction:column; gap:0.5rem;
+    margin-bottom:3rem;
+  }
+  .if-row {
+    font-size:0.7rem; letter-spacing:0.18em; text-transform:lowercase;
+    color:#666; font-weight:300;
+  }
+  .if-row::before { content:'— '; color:#333; }
+
+  .dont-be {
+    font-size:0.7rem; letter-spacing:0.25em; text-transform:lowercase;
+    color:#555; font-weight:300; margin-bottom:0.5rem;
+  }
+  .always-as {
+    font-size:0.7rem; letter-spacing:0.25em; text-transform:lowercase;
+    color:#888; font-weight:300; margin-bottom:3.5rem;
+  }
+  .always-as .name-pink { color:var(--pink); }
+
+  /* links — no numbers */
+  .links-stack { display:flex; flex-direction:column; gap:0; }
+  .social-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.4rem 0; border-bottom:1px solid #161616;
+    text-decoration:none; color:var(--white);
+    transition:padding-left 0.3s;
+  }
+  .social-row:hover { padding-left:1rem; }
+  .social-row:hover .row-arrow { opacity:1; transform:translateX(0); }
+  .social-row:hover .row-name { color:var(--white); }
+
+  .row-left { display:flex; align-items:center; gap:1.2rem; }
+  .row-platform { font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:#444; margin-bottom:0.2rem; }
+  .row-name { font-size:1.2rem; font-weight:300; color:#999; transition:color 0.2s; }
+  .row-arrow { font-size:1rem; color:var(--pink); opacity:0; transform:translateX(-8px); transition:opacity 0.2s,transform 0.3s; }
+
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+
+  footer { text-align:center; padding:2.5rem; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:#222; }
+
+  @media(max-width:700px) {
+    main { padding:8rem 1.8rem 4rem; }
+    nav { padding:1.2rem 1.8rem; gap:1.5rem; }
+    .row-name { font-size:1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">home</a>
+  <a href="travels.html">travels</a>
+  <a href="music.html">music</a>
+  <a href="contact.html" class="active">contact</a>
+</nav>
+
+<main>
+  <h1 class="page-title fade-in">find me</h1>
+
+  <div class="if-you fade-in">
+    <span class="if-row">you have experience abroad</span>
+    <span class="if-row">you love music or creating things</span>
+    <span class="if-row">you're a fellow third culture kid</span>
+    <span class="if-row">you just feel like connecting</span>
+  </div>
+
+  <p class="dont-be fade-in">don't be a stranger.</p>
+  <p class="always-as fade-in">always as <span class="name-pink">fydoer</span></p>
+
+  <div class="links-stack fade-in">
+    <a class="social-row" href="https://www.instagram.com/fydoer" target="_blank" rel="noopener">
+      <div class="row-left">
+        <div><p class="row-platform">Instagram</p><p class="row-name">@fydoer</p></div>
+      </div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a class="social-row" href="https://www.tiktok.com/@fydoer" target="_blank" rel="noopener">
+      <div class="row-left">
+        <div><p class="row-platform">TikTok</p><p class="row-name">@fydoer</p></div>
+      </div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a class="social-row" href="https://www.linkedin.com/in/federica-schnur-0164b0333/" target="_blank" rel="noopener">
+      <div class="row-left">
+        <div><p class="row-platform">LinkedIn</p><p class="row-name">federica schnur</p></div>
+      </div>
+      <span class="row-arrow">→</span>
+    </a>
+  </div>
+</main>
+
+<footer>© fydoer</footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
