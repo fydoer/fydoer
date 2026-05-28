@@ -318,15 +318,15 @@
   <svg id="squiggle-svg" aria-hidden="true">
     <defs>
       <filter id="fg">
-        <feGaussianBlur stdDeviation="1.2" result="b"></feGaussianBlur>
+        <feGaussianBlur stdDeviation="0.75" result="b"></feGaussianBlur>
         <feMerge>
           <feMergeNode in="b"></feMergeNode>
           <feMergeNode in="SourceGraphic"></feMergeNode>
         </feMerge>
       </filter>
     </defs>
-    <path id="sq-bg" fill="none" stroke="white" stroke-width="1.6" opacity="0.06" stroke-linecap="round" stroke-linejoin="round"></path>
-    <path id="sq-draw" fill="none" stroke="white" stroke-width="2.1" opacity="0.82" stroke-linecap="round" stroke-linejoin="round" filter="url(#fg)"></path>
+    <path id="sq-bg" fill="none" stroke="white" stroke-width="1.35" opacity="0.045" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path id="sq-draw" fill="none" stroke="white" stroke-width="1.95" opacity="0.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#fg)"></path>
   </svg>
 
   <div class="entries">
@@ -464,103 +464,4 @@
     const x = v => 40 + v;
     const y = v => v * s;
 
-    const d = [
-  `M ${x(0)} ${y(0)}`,
-
-  `C ${x(8)} ${y(22)}, ${x(20)} ${y(42)}, ${x(16)} ${y(64)}`,
-  `C ${x(12)} ${y(86)}, ${x(-4)} ${y(102)}, ${x(-10)} ${y(120)}`,
-  `C ${x(-16)} ${y(138)}, ${x(-10)} ${y(156)}, ${x(2)} ${y(154)}`,
-
-  `C ${x(16)} ${y(152)}, ${x(24)} ${y(138)}, ${x(18)} ${y(122)}`,
-  `C ${x(10)} ${y(102)}, ${x(-18)} ${y(128)}, ${x(-22)} ${y(168)}`,
-
-  `C ${x(-24)} ${y(204)}, ${x(0)} ${y(228)}, ${x(18)} ${y(246)}`,
-  `C ${x(32)} ${y(260)}, ${x(34)} ${y(282)}, ${x(24)} ${y(298)}`,
-  `C ${x(14)} ${y(314)}, ${x(-2)} ${y(314)}, ${x(-8)} ${y(300)}`,
-
-  `C ${x(-14)} ${y(286)}, ${x(-6)} ${y(272)}, ${x(8)} ${y(278)}`,
-  `C ${x(24)} ${y(286)}, ${x(34)} ${y(316)}, ${x(24)} ${y(346)}`,
-
-  `C ${x(14)} ${y(376)}, ${x(-14)} ${y(392)}, ${x(-24)} ${y(416)}`,
-  `C ${x(-32)} ${y(438)}, ${x(-24)} ${y(458)}, ${x(-6)} ${y(468)}`,
-  `C ${x(12)} ${y(478)}, ${x(22)} ${y(494)}, ${x(18)} ${y(512)}`,
-
-  `C ${x(14)} ${y(528)}, ${x(4)} ${y(534)}, ${x(0)} ${y(526)}`,
-  `C ${x(-4)} ${y(516)}, ${x(6)} ${y(506)}, ${x(14)} ${y(512)}`,
-
-  `C ${x(26)} ${y(522)}, ${x(38)} ${y(554)}, ${x(28)} ${y(586)}`,
-  `C ${x(20)} ${y(614)}, ${x(-8)} ${y(632)}, ${x(-18)} ${y(650)}`,
-  `C ${x(-28)} ${y(668)}, ${x(-30)} ${y(690)}, ${x(-18)} ${y(704)}`,
-
-  `C ${x(-8)} ${y(716)}, ${x(6)} ${y(714)}, ${x(10)} ${y(700)}`,
-  `C ${x(14)} ${y(686)}, ${x(4)} ${y(676)}, ${x(-6)} ${y(682)}`,
-
-  `C ${x(-18)} ${y(690)}, ${x(-34)} ${y(722)}, ${x(-24)} ${y(756)}`,
-  `C ${x(-14)} ${y(790)}, ${x(6)} ${y(812)}, ${x(18)} ${y(830)}`,
-  `C ${x(28)} ${y(846)}, ${x(24)} ${y(866)}, ${x(12)} ${y(880)}`,
-
-  `C ${x(0)} ${y(894)}, ${x(-12)} ${y(892)}, ${x(-14)} ${y(880)}`,
-  `C ${x(-16)} ${y(868)}, ${x(-4)} ${y(860)}, ${x(4)} ${y(866)}`,
-
-  `C ${x(14)} ${y(874)}, ${x(6)} ${y(928)}, ${x(0)} ${y(1000)}`
-].join(' ');
-
-    ['sq-bg', 'sq-draw'].forEach(id => {
-      document.getElementById(id).setAttribute('d', d);
-    });
-
-    const draw = document.getElementById('sq-draw');
-    const len = draw.getTotalLength();
-    draw.style.strokeDasharray = len;
-    draw.style.strokeDashoffset = len;
-    draw.style.transition = 'stroke-dashoffset 5s cubic-bezier(0.4,0,0.2,1) 0.3s';
-
-    requestAnimationFrame(() => {
-      draw.style.strokeDashoffset = 0;
-    });
-  }
-
-  window.addEventListener('load', buildSquiggle);
-  window.addEventListener('resize', buildSquiggle);
-
-  const allFrames = document.querySelectorAll('.photo-frame');
-  let currentSet = null;
-
-  function hideAll() {
-    allFrames.forEach(frame => frame.classList.remove('show'));
-  }
-
-  function showSet(name) {
-    if (!name || name === 'none') return;
-    document.querySelectorAll(`.photo-frame[data-set="${name}"]`).forEach((frame, i) => {
-      setTimeout(() => frame.classList.add('show'), i * 100);
-    });
-  }
-
-  const entryEls = document.querySelectorAll('.entry');
-
-  const entryObs = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const set = entry.target.dataset.photos;
-
-          if (set !== currentSet) {
-            hideAll();
-            currentSet = set;
-            showSet(set);
-          }
-
-          entryEls.forEach(el => el.classList.remove('active'));
-          entry.target.classList.add('active');
-        }
-      });
-    },
-    { threshold: 0.45, rootMargin: '-15% 0px -15% 0px' }
-  );
-
-  entryEls.forEach(el => entryObs.observe(el));
-</script>
-
-</body>
-</html>
+    const d 
