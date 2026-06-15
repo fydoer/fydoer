@@ -47,8 +47,8 @@
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.7rem;
     transition:border-color 0.25s, transform 0.25s;
   }
-  .video-card:hover { border-color:var(--pink); transform:translateY(-3px); }
-  .video-card video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:none; border-radius:10px; }
+  .video-card:hover { border-color:var(--pink); transform:translateY(-12px) scale(1.04); box-shadow:0 30px 80px rgba(0,0,0,0.7); }
+  .video-card video { width:100%; display:block; border-radius:10px 10px 0 0; }
   .video-placeholder { display:flex; flex-direction:column; align-items:center; gap:0.6rem; z-index:1; pointer-events:none; }
   .play-btn {
     width:48px; height:48px; border-radius:50%;
@@ -97,17 +97,17 @@
     <div class="country-line"></div>
   </div>
   <div class="videos-grid">
-    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;">
-      <video src="Paris vlog (1) (1).mp4" preload="metadata" controls style="position:relative;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px 10px 0 0;"></video>
-      <p style="padding:0.7rem 1rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:lowercase;color:#555;">paris</p>
+    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;background:transparent;border-color:transparent;">
+      <video src="Paris vlog (1) (1).mp4" preload="metadata" controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;"></video>
+      <p style="padding:0.5rem 0 0;font-size:0.85rem;letter-spacing:0.15em;text-transform:lowercase;color:var(--white);font-weight:300;">paris</p>
     </div>
-    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;">
-      <video src="Nice vlog (3) (1).mp4" preload="metadata" controls style="position:relative;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px 10px 0 0;"></video>
-      <p style="padding:0.7rem 1rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:lowercase;color:#555;">nice</p>
+    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;background:transparent;border-color:transparent;">
+      <video src="Nice vlog (3) (1).mp4" preload="metadata" controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;"></video>
+      <p style="padding:0.5rem 0 0;font-size:0.85rem;letter-spacing:0.15em;text-transform:lowercase;color:var(--white);font-weight:300;">nice</p>
     </div>
-    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;">
-      <video src="Pin sec vlog (1) (1).mp4" preload="metadata" controls style="position:relative;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px 10px 0 0;"></video>
-      <p style="padding:0.7rem 1rem;font-size:0.65rem;letter-spacing:0.15em;text-transform:lowercase;color:#555;">pin sec</p>
+    <div class="video-card" style="flex-direction:column;aspect-ratio:unset;background:transparent;border-color:transparent;">
+      <video src="Pin sec vlog (1) (1).mp4" preload="metadata" controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;"></video>
+      <p style="padding:0.5rem 0 0;font-size:0.85rem;letter-spacing:0.15em;text-transform:lowercase;color:var(--white);font-weight:300;">pin sec</p>
     </div>
   </div>
 </div>
@@ -117,6 +117,13 @@
 <script>
   const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.08});
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // stop other videos when one starts playing
+  document.querySelectorAll('video').forEach(vid => {
+    vid.addEventListener('play', () => {
+      document.querySelectorAll('video').forEach(v => { if(v !== vid) { v.pause(); } });
+    });
+  });
 </script>
 </body>
 </html>
