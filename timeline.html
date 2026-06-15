@@ -26,67 +26,66 @@
   .entries{margin-left:8rem;display:flex;flex-direction:column;}
 
   .entry{
-    position:relative;padding:4rem 0;
-    display:grid;grid-template-columns:80px 1fr;gap:0 2rem;align-items:start;
+    position:relative;padding:4.5rem 0;
+    display:grid;grid-template-columns:80px 1fr;gap:0 2rem;align-items:center;
+    cursor:default;
   }
+
   .entry-year{
     font-family:'Barlow Condensed',sans-serif;font-style:italic;font-weight:700;
-    font-size:1.3rem;color:#252525;text-align:right;padding-top:0.1rem;
+    font-size:1.3rem;color:#1e1e1e;text-align:right;
     transition:color 0.4s;line-height:1;
   }
-  .entry.active .entry-year{color:var(--white);}
+  .entry:hover .entry-year{ color:var(--white); }
+
   .entry-body{display:flex;flex-direction:column;gap:0.3rem;}
-  .entry-flag{font-size:1.2rem;}
-  .entry-place{font-size:1.2rem;font-weight:300;color:#666;transition:color 0.4s;}
-  .entry.active .entry-place{color:var(--white);}
-  .entry-desc{font-size:0.78rem;line-height:1.8;color:#3a3a3a;font-weight:300;max-width:400px;margin-top:0.4rem;transition:color 0.4s;}
-  .entry.active .entry-desc{color:#666;}
-  .entry-tag{display:inline-block;font-size:0.57rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:20px;border:1px solid #1e1e1e;color:#333;margin-top:0.5rem;}
-  .entry-tag.pink{border-color:rgba(255,63,164,0.3);color:var(--pink);}
-  .entry-tag.blue{border-color:rgba(63,143,255,0.3);color:var(--blue);}
+
+  .entry-place{
+    font-size:1.2rem;font-weight:300;color:#1e1e1e;
+    transition:color 0.4s;
+  }
+  .entry:hover .entry-place{ color:var(--white); }
+
+  .entry-tag{display:inline-block;font-size:0.57rem;letter-spacing:0.18em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:20px;border:1px solid #1a1a1a;color:#1a1a1a;margin-top:0.4rem;transition:color 0.4s,border-color 0.4s;}
+  .entry:hover .entry-tag{color:#444;border-color:#444;}
+  .entry-tag.pink{border-color:#1a0a10;color:#1a0a10;}
+  .entry:hover .entry-tag.pink{border-color:rgba(255,63,164,0.4);color:var(--pink);}
+  .entry-tag.blue{border-color:#0a0f1a;color:#0a0f1a;}
+  .entry:hover .entry-tag.blue{border-color:rgba(63,143,255,0.4);color:var(--blue);}
 
   /* ── floating photos ── */
   .photo-frame{
     position:fixed;pointer-events:none;z-index:50;
-    opacity:0;transition:opacity 0.55s ease,transform 0.55s ease;
+    opacity:0;transition:opacity 0.5s ease,transform 0.5s ease;
   }
   .photo-frame.show{opacity:1;}
 
-  .photo-inner{
-    background:#0f0f0f;
-    border:1px solid #1f1f1f;
-    overflow:hidden;
-  }
-  .photo-inner .img-area{
-    display:flex;align-items:center;justify-content:center;
-    font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;color:#222;
-    overflow:hidden;background:#111;
-  }
-  .photo-inner .img-area img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(0.1) contrast(1.05) brightness(0.95);}
+  .photo-inner{background:#0f0f0f;border:1px solid #1a1a1a;overflow:hidden;}
+  .photo-inner .img-area{overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;}
+  .photo-inner .img-area img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(0.08) contrast(1.04) brightness(0.96);}
 
-  /* sizes */
-  .photo-frame.lg .img-area{width:280px;height:200px;}
-  .photo-frame.sm .img-area{width:190px;height:190px;}
-  .photo-frame.tall .img-area{width:180px;height:250px;}
-  .photo-frame.wide .img-area{width:300px;height:165px;}
+  .photo-frame.lg .img-area{width:340px;height:240px;}
+  .photo-frame.sm .img-area{width:240px;height:240px;}
+  .photo-frame.tall .img-area{width:220px;height:310px;}
+  .photo-frame.wide .img-area{width:370px;height:200px;}
 
-  /* positions — more towards center */
-  .photo-frame.pos-tl{top:14vh;left:6vw;transform:translateX(-50px) rotate(-1.5deg);}
+  /* positions — more central, slide in from sides */
+  .photo-frame.pos-tl{top:18vh;left:8vw;transform:translateX(-70px) rotate(-1.5deg);}
   .photo-frame.pos-tl.show{transform:translateX(0) rotate(-1.5deg);}
 
-  .photo-frame.pos-bl{top:56vh;left:6vw;transform:translateX(-50px) rotate(2deg);}
+  .photo-frame.pos-bl{top:54vh;left:8vw;transform:translateX(-70px) rotate(2deg);}
   .photo-frame.pos-bl.show{transform:translateX(0) rotate(2deg);}
 
-  .photo-frame.pos-tr{top:12vh;right:6vw;transform:translateX(50px) rotate(1deg);}
+  .photo-frame.pos-tr{top:16vh;right:8vw;transform:translateX(70px) rotate(1deg);}
   .photo-frame.pos-tr.show{transform:translateX(0) rotate(1deg);}
 
-  .photo-frame.pos-br{top:54vh;right:6vw;transform:translateX(50px) rotate(-2deg);}
+  .photo-frame.pos-br{top:52vh;right:8vw;transform:translateX(70px) rotate(-2deg);}
   .photo-frame.pos-br.show{transform:translateX(0) rotate(-2deg);}
 
-  .photo-frame.pos-ml{top:36vh;left:6vw;transform:translateX(-50px) rotate(0.5deg);}
+  .photo-frame.pos-ml{top:38vh;left:8vw;transform:translateX(-70px) rotate(0.5deg);}
   .photo-frame.pos-ml.show{transform:translateX(0) rotate(0.5deg);}
 
-  .photo-frame.pos-mr{top:38vh;right:6vw;transform:translateX(50px) rotate(-0.8deg);}
+  .photo-frame.pos-mr{top:40vh;right:8vw;transform:translateX(70px) rotate(-0.8deg);}
   .photo-frame.pos-mr.show{transform:translateX(0) rotate(-0.8deg);}
 
   .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
@@ -95,10 +94,11 @@
   footer{text-align:center;padding:2.5rem;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#1a1a1a;}
 
   @media(max-width:700px){
-    nav{padding:1.2rem 1.8rem;gap:1.5rem;}
+    nav{padding:1.2rem 1.8rem;gap:1.2rem;flex-wrap:wrap;justify-content:center;}
     .page-header{padding:10rem 1.8rem 2rem;}
     #squiggle-svg{left:1rem;}
     .entries{margin-left:4rem;}
+    .entry{grid-template-columns:56px 1fr;gap:0 1rem;}
     .photo-frame{display:none;}
   }
 </style>
@@ -107,6 +107,7 @@
 
 <nav>
   <a href="index.html">home</a>
+  <a href="timeline.html" class="active">timeline</a>
   <a href="travels.html">travels</a>
   <a href="music.html">music</a>
   <a href="contact.html">contact</a>
@@ -120,110 +121,81 @@
 <div class="scene">
   <svg id="squiggle-svg" aria-hidden="true">
     <defs>
-      <filter id="fg"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="fg"><feGaussianBlur stdDeviation="0.7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
-    <!-- dim base line always visible -->
-    <path id="sq-bg" fill="none" stroke="white" stroke-width="2" opacity="0.10" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- bright revealed portion -->
-    <path id="sq-lit" fill="none" stroke="white" stroke-width="2.5" opacity="0" stroke-linecap="round" stroke-linejoin="round" filter="url(#fg)"/>
+    <path id="sq-bg" fill="none" stroke="white" stroke-width="1.25" opacity="0.035" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="sq-lit" fill="none" stroke="white" stroke-width="1.75" opacity="0" stroke-linecap="round" stroke-linejoin="round" filter="url(#fg)"/>
   </svg>
 
   <div class="entries">
 
-    <div class="entry fade-in" data-photos="berlin">
+    <div class="entry fade-in" data-photos="none">
       <span class="entry-year">2005</span>
       <div class="entry-body">
-        <span class="entry-flag">🇩🇪</span>
-        <p class="entry-place">Berlin, Germany</p>
-        <p class="entry-desc">Born April 28th in Wilmersdorf. First birthday already celebrated in Rome — elsewhere before I could walk.</p>
-        <span class="entry-tag">chapter one</span>
+        <p class="entry-place">Berlin, Wilmersdorf</p>
       </div>
     </div>
 
     <div class="entry fade-in" data-photos="rome">
       <span class="entry-year">2006</span>
       <div class="entry-body">
-        <span class="entry-flag">🇮🇹</span>
-        <p class="entry-place">Rome, Italy</p>
-        <p class="entry-desc">First year of life, first city abroad. A very early start to a very long pattern.</p>
-        <span class="entry-tag">age 0–1</span>
+        <p class="entry-place">Italy, Rome</p>
       </div>
     </div>
 
     <div class="entry fade-in" data-photos="riyadh">
       <span class="entry-year">2007</span>
       <div class="entry-body">
-        <span class="entry-flag">🇸🇦</span>
         <p class="entry-place">Riyadh, Saudi Arabia</p>
-        <p class="entry-desc">Ages 2–4. American kindergarten. No Arabic, no Russian — just English I had to figure out myself as a three-year-old.</p>
-        <span class="entry-tag">age 2–4</span>
       </div>
     </div>
 
     <div class="entry fade-in" data-photos="none">
       <span class="entry-year">2009</span>
       <div class="entry-body">
-        <span class="entry-flag">🇩🇪</span>
-        <p class="entry-place">Brandenburg, Germany</p>
-        <p class="entry-desc">A house in the countryside. Four years of something that almost felt like staying put. Primary school, ages 4–10.</p>
-        <span class="entry-tag">age 4–10</span>
+        <p class="entry-place">back in Germany</p>
+      </div>
+    </div>
+
+    <div class="entry fade-in" data-photos="russia">
+      <span class="entry-year">2013</span>
+      <div class="entry-body">
+        <p class="entry-place">Novosibirsk, Russia</p>
       </div>
     </div>
 
     <div class="entry fade-in" data-photos="jakarta">
       <span class="entry-year">2015</span>
       <div class="entry-body">
-        <span class="entry-flag">🇮🇩</span>
         <p class="entry-place">Jakarta, Indonesia</p>
-        <p class="entry-desc">5th to 7th grade. Three years that actually stuck. The chapter I go back to most — the one that shaped me more than any other.</p>
-        <span class="entry-tag pink">most formative</span>
       </div>
     </div>
 
-    <div class="entry fade-in" data-photos="potsdam">
+    <div class="entry fade-in" data-photos="none">
       <span class="entry-year">2018</span>
       <div class="entry-body">
-        <span class="entry-flag">🇩🇪</span>
         <p class="entry-place">Potsdam, Germany</p>
-        <p class="entry-desc">8th to 12th grade. Back to the same school as my best friend from first grade. Built a whole world of people. Abitur 2023.</p>
-        <span class="entry-tag">age 13–18</span>
       </div>
     </div>
 
     <div class="entry fade-in" data-photos="gap">
       <span class="entry-year">2023</span>
       <div class="entry-body">
-        <span class="entry-flag">🌍</span>
         <p class="entry-place">the year everyone wants you to figure it out</p>
-        <p class="entry-desc">Studying, travelling, working. Italian language course → spontaneous two-week road trip through Italy. A semester of philological studies at UP. Then a pivot.</p>
-        <span class="entry-tag blue">in between</span>
       </div>
     </div>
 
-    <div class="entry fade-in" data-photos="none">
-      <span class="entry-year">2024</span>
+    <div class="entry fade-in" data-photos="now">
+      <span class="entry-year">2024 <span style="font-size:1rem;">— now</span></span>
       <div class="entry-body">
-        <span class="entry-flag">🇩🇪</span>
-        <p class="entry-place">TH Wildau</p>
-        <p class="entry-desc">September 2024. European Business Management. Back in Berlin to live, studying in Wildau. New direction.</p>
-        <span class="entry-tag blue">currently</span>
-      </div>
-    </div>
-
-    <div class="entry fade-in" data-photos="ef">
-      <span class="entry-year">2025</span>
-      <div class="entry-body">
-        <span class="entry-flag">🇩🇪</span>
-        <p class="entry-place">EF — Activity Leader</p>
-        <p class="entry-desc">October 2025. City tours, museum visits, karaoke nights, Stammtisch, weekend trips — organising life in Berlin for international students. Turns out growing up between worlds was good training.</p>
-        <span class="entry-tag pink">currently</span>
+        <p class="entry-place">Berlin, Germany</p>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- floating photos, slide in from edges -->
+<!-- photos -->
 <div class="photo-frame lg pos-tl" data-set="rome"><div class="photo-inner"><div class="img-area"><img src="italy 1.jpeg" alt="rome"/></div></div></div>
 <div class="photo-frame sm pos-br" data-set="rome"><div class="photo-inner"><div class="img-area"><img src="italy2.jpeg" alt="rome"/></div></div></div>
 
@@ -239,120 +211,103 @@
 <div class="photo-frame lg pos-tr" data-set="gap"><div class="photo-inner"><div class="img-area"><img src="graduation.jpeg" alt="graduation"/></div></div></div>
 <div class="photo-frame sm pos-ml" data-set="gap"><div class="photo-inner"><div class="img-area"><img src="graduation 2.jpeg" alt="graduation"/></div></div></div>
 
-<div class="photo-frame lg pos-tl" data-set="berlin2"><div class="photo-inner"><div class="img-area"><img src="now 1.jpeg" alt="now"/></div></div></div>
-<div class="photo-frame sm pos-br" data-set="berlin2"><div class="photo-inner"><div class="img-area"><img src="now 2.jpeg" alt="now"/></div></div></div>
-<div class="photo-frame tall pos-tr" data-set="berlin2"><div class="photo-inner"><div class="img-area"><img src="th wildau.jpeg" alt="th wildau"/></div></div></div>
+<div class="photo-frame lg pos-tl" data-set="now"><div class="photo-inner"><div class="img-area"><img src="now 1.jpeg" alt="now"/></div></div></div>
+<div class="photo-frame sm pos-br" data-set="now"><div class="photo-inner"><div class="img-area"><img src="now 2.jpeg" alt="now"/></div></div></div>
+<div class="photo-frame tall pos-tr" data-set="now"><div class="photo-inner"><div class="img-area"><img src="th wildau.jpeg" alt="th wildau"/></div></div></div>
 
-<footer>© fydoer</footer>
+<footer>fydoer</footer>
 
 <script>
-const obs = new IntersectionObserver(e => e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08});
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-// ── vine-like squiggle ──
+// squiggle
 function buildSquiggle(){
-  const svg = document.getElementById('squiggle-svg');
-  const scene = document.querySelector('.scene');
-  const h = scene.scrollHeight;
+  const svg=document.getElementById('squiggle-svg');
+  const scene=document.querySelector('.scene');
+  const h=scene.scrollHeight;
   svg.setAttribute('viewBox',`0 0 80 ${h}`);
   svg.setAttribute('height',h);
-
-  const entries = document.querySelectorAll('.entry');
-  const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
-  const pts = Array.from(entries).map(e=>{
-    const r = e.getBoundingClientRect();
-    return r.top + window.scrollY - sceneTop + 28;
-  });
-
-  // scale factor: path designed for 1000px height
-  const s = h / 1000;
-  const x = v => 40 + v; // center is x=40
-  const y = v => v * s;
-
-  // hand-drawn path with real loops (line crosses itself) at irregular intervals
-  const d = [
+  const s=h/1000;
+  const x=v=>40+v;
+  const y=v=>v*s;
+  const d=[
     `M ${x(0)} ${y(0)}`,
-    // gentle drift right
-    `C ${x(12)} ${y(18)}, ${x(28)} ${y(38)}, ${x(22)} ${y(55)}`,
-    // loop 1 — small left teardrop
-    `C ${x(14)} ${y(68)}, ${x(-8)} ${y(74)}, ${x(-14)} ${y(85)}`,
-    `C ${x(-22)} ${y(98)}, ${x(-16)} ${y(112)}, ${x(-4)} ${y(108)}`,
-    `C ${x(10)} ${y(104)}, ${x(18)} ${y(95)}, ${x(8)} ${y(88)}`,
-    // sweep wide right
-    `C ${x(-8)} ${y(108)}, ${x(-38)} ${y(130)}, ${x(38)} ${y(175)}`,
-    `C ${x(52)} ${y(195)}, ${x(44)} ${y(215)}, ${x(30)} ${y(228)}`,
-    // sweep back left, crossing over
-    `C ${x(10)} ${y(242)}, ${x(-42)} ${y(255)}, ${x(-36)} ${y(272)}`,
-    // loop 2 — right side, larger
-    `C ${x(-28)} ${y(288)}, ${x(8)} ${y(298)}, ${x(20)} ${y(312)}`,
-    `C ${x(36)} ${y(328)}, ${x(42)} ${y(348)}, ${x(30)} ${y(360)}`,
-    `C ${x(18)} ${y(372)}, ${x(-4)} ${y(368)}, ${x(-8)} ${y(355)}`,
-    `C ${x(-14)} ${y(342)}, ${x(-2)} ${y(330)}, ${x(10)} ${y(338)}`,
-    // long lazy left sweep
-    `C ${x(24)} ${y(352)}, ${x(-52)} ${y(400)}, ${x(-40)} ${y(435)}`,
-    `C ${x(-30)} ${y(455)}, ${x(-10)} ${y(468)}, ${x(4)} ${y(478)}`,
-    // loop 3 — tiny right drop
-    `C ${x(18)} ${y(490)}, ${x(32)} ${y(500)}, ${x(28)} ${y(514)}`,
-    `C ${x(24)} ${y(528)}, ${x(8)} ${y(530)}, ${x(4)} ${y(520)}`,
-    `C ${x(0)} ${y(510)}, ${x(8)} ${y(502)}, ${x(16)} ${y(510)}`,
-    // sweep right big
-    `C ${x(28)} ${y(522)}, ${x(50)} ${y(555)}, ${x(38)} ${y(585)}`,
-    `C ${x(26)} ${y(608)}, ${x(-8)} ${y(618)}, ${x(-22)} ${y(632)}`,
-    // loop 4 — left, medium
-    `C ${x(-38)} ${y(648)}, ${x(-44)} ${y(668)}, ${x(-32)} ${y(680)}`,
-    `C ${x(-20)} ${y(692)}, ${x(-2)} ${y(686)}, ${x(2)} ${y(674)}`,
-    `C ${x(6)} ${y(662)}, ${x(-6)} ${y(654)}, ${x(-18)} ${y(662)}`,
-    // flow back right and down
-    `C ${x(-32)} ${y(674)}, ${x(44)} ${y(720)}, ${x(32)} ${y(752)}`,
-    `C ${x(20)} ${y(772)}, ${x(-14)} ${y(780)}, ${x(-8)} ${y(798)}`,
-    // loop 5 — small right teardrop near bottom
-    `C ${x(0)} ${y(812)}, ${x(24)} ${y(820)}, ${x(26)} ${y(836)}`,
-    `C ${x(28)} ${y(852)}, ${x(14)} ${y(860)}, ${x(4)} ${y(852)}`,
-    `C ${x(-8)} ${y(844)}, ${x(-4)} ${y(832)}, ${x(8)} ${y(836)}`,
-    // wind gently to end
-    `C ${x(18)} ${y(852)}, ${x(-10)} ${y(920)}, ${x(0)} ${y(1000)}`,
+    `C ${x(10)} ${y(18)}, ${x(22)} ${y(38)}, ${x(18)} ${y(58)}`,
+    `C ${x(14)} ${y(78)}, ${x(-2)} ${y(94)}, ${x(-8)} ${y(112)}`,
+    `C ${x(-14)} ${y(130)}, ${x(-10)} ${y(148)}, ${x(0)} ${y(150)}`,
+    `C ${x(12)} ${y(152)}, ${x(20)} ${y(142)}, ${x(17)} ${y(126)}`,
+    `C ${x(12)} ${y(106)}, ${x(-10)} ${y(124)}, ${x(-16)} ${y(160)}`,
+    `C ${x(-20)} ${y(194)}, ${x(-2)} ${y(220)}, ${x(14)} ${y(238)}`,
+    `C ${x(26)} ${y(252)}, ${x(30)} ${y(272)}, ${x(22)} ${y(290)}`,
+    `C ${x(14)} ${y(306)}, ${x(0)} ${y(308)}, ${x(-6)} ${y(296)}`,
+    `C ${x(-12)} ${y(284)}, ${x(-6)} ${y(272)}, ${x(6)} ${y(276)}`,
+    `C ${x(20)} ${y(282)}, ${x(30)} ${y(308)}, ${x(23)} ${y(336)}`,
+    `C ${x(16)} ${y(364)}, ${x(-10)} ${y(382)}, ${x(-20)} ${y(406)}`,
+    `C ${x(-28)} ${y(426)}, ${x(-22)} ${y(446)}, ${x(-6)} ${y(456)}`,
+    `C ${x(10)} ${y(466)}, ${x(20)} ${y(482)}, ${x(17)} ${y(498)}`,
+    `C ${x(14)} ${y(512)}, ${x(6)} ${y(518)}, ${x(2)} ${y(512)}`,
+    `C ${x(-2)} ${y(502)}, ${x(4)} ${y(494)}, ${x(12)} ${y(498)}`,
+    `C ${x(24)} ${y(508)}, ${x(34)} ${y(538)}, ${x(26)} ${y(568)}`,
+    `C ${x(18)} ${y(594)}, ${x(-4)} ${y(612)}, ${x(-14)} ${y(630)}`,
+    `C ${x(-24)} ${y(648)}, ${x(-26)} ${y(668)}, ${x(-16)} ${y(682)}`,
+    `C ${x(-8)} ${y(694)}, ${x(4)} ${y(694)}, ${x(8)} ${y(682)}`,
+    `C ${x(12)} ${y(670)}, ${x(4)} ${y(662)}, ${x(-4)} ${y(666)}`,
+    `C ${x(-14)} ${y(674)}, ${x(-28)} ${y(704)}, ${x(-20)} ${y(738)}`,
+    `C ${x(-12)} ${y(770)}, ${x(4)} ${y(792)}, ${x(16)} ${y(810)}`,
+    `C ${x(24)} ${y(824)}, ${x(22)} ${y(844)}, ${x(12)} ${y(858)}`,
+    `C ${x(2)} ${y(872)}, ${x(-8)} ${y(872)}, ${x(-10)} ${y(862)}`,
+    `C ${x(-12)} ${y(852)}, ${x(-4)} ${y(846)}, ${x(2)} ${y(850)}`,
+    `C ${x(10)} ${y(856)}, ${x(6)} ${y(920)}, ${x(0)} ${y(1000)}`
   ].join(' ');
 
-  ['sq-bg','sq-draw'].forEach(id=>document.getElementById(id).setAttribute('d',d));
-
-  const draw = document.getElementById('sq-draw');
-  const len = draw.getTotalLength();
-  draw.style.strokeDasharray = len;
-  draw.style.strokeDashoffset = len;
-  draw.style.transition = 'stroke-dashoffset 5s cubic-bezier(0.4,0,0.2,1) 0.3s';
-  requestAnimationFrame(()=>{draw.style.strokeDashoffset=0;});
+  document.getElementById('sq-bg').setAttribute('d',d);
+  const lit=document.getElementById('sq-lit');
+  lit.setAttribute('d',d);
+  lit.style.opacity='0.82';
+  const len=lit.getTotalLength();
+  lit.style.strokeDasharray=len;
+  lit.style.strokeDashoffset=len;
+  requestAnimationFrame(()=>{
+    const svgTop=svg.getBoundingClientRect().top+window.scrollY;
+    function update(){
+      const mid=window.scrollY+window.innerHeight*0.6;
+      const progress=Math.max(0,Math.min(1,(mid-svgTop)/h));
+      lit.style.strokeDashoffset=len-(progress*len);
+    }
+    update();
+    window.addEventListener('scroll',update,{passive:true});
+  });
 }
 window.addEventListener('load',buildSquiggle);
 window.addEventListener('resize',buildSquiggle);
 
-// ── active entry → photos slide in from edges ──
-const allFrames = document.querySelectorAll('.photo-frame');
-let currentSet = null;
+// photos show on hover
+const allFrames=document.querySelectorAll('.photo-frame');
+let currentSet=null;
 
 function hideAll(){allFrames.forEach(f=>f.classList.remove('show'));}
 function showSet(name){
   if(!name||name==='none')return;
   document.querySelectorAll(`.photo-frame[data-set="${name}"]`).forEach((f,i)=>{
-    setTimeout(()=>f.classList.add('show'),i*100);
+    setTimeout(()=>f.classList.add('show'),i*80);
   });
 }
 
-const entryEls = document.querySelectorAll('.entry');
-const entryObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const set = e.target.dataset.photos;
-      if(set!==currentSet){
-        hideAll();
-        currentSet=set;
-        showSet(set);
-        entryEls.forEach(el=>el.classList.remove('active'));
-        e.target.classList.add('active');
-      }
+document.querySelectorAll('.entry').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    const set=el.dataset.photos;
+    if(set!==currentSet){
+      hideAll();
+      currentSet=set;
+      showSet(set);
     }
   });
-},{threshold:0.45,rootMargin:'-15% 0px -15% 0px'});
-entryEls.forEach(el=>entryObs.observe(el));
+  el.addEventListener('mouseleave',()=>{
+    hideAll();
+    currentSet=null;
+  });
+});
 </script>
 </body>
 </html>
