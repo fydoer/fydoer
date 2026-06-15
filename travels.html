@@ -48,7 +48,7 @@
     transition:border-color 0.25s, transform 0.25s;
   }
   .video-card:hover { border-color:var(--pink); transform:translateY(-3px); }
-  .video-card video, .video-card iframe { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:none; }
+  .video-card video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:none; border-radius:10px; }
   .video-placeholder { display:flex; flex-direction:column; align-items:center; gap:0.6rem; z-index:1; pointer-events:none; }
   .play-btn {
     width:48px; height:48px; border-radius:50%;
@@ -97,7 +97,9 @@
     <div class="country-line"></div>
   </div>
   <div class="videos-grid">
-    <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 01</span></div></div>
+    <div class="video-card">
+      <video src="Nice vlog.mp4" preload="metadata" controls></video>
+    </div>
     <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 02</span></div></div>
     <div class="video-card"><div class="video-placeholder"><div class="play-btn">▶</div><span class="video-label">france vlog 03</span></div></div>
   </div>
