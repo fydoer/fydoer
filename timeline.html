@@ -115,7 +115,7 @@
 
 <div class="page-header fade-in">
   <h1 class="page-title">timeline</h1>
-  <p class="page-subtitle">whenever, wherever...</p>
+  <p class="page-subtitle">the rough version of my life</p>
 </div>
 
 <div class="scene">
@@ -160,7 +160,7 @@
     <div class="entry fade-in" data-photos="russia">
       <span class="entry-year">2013</span>
       <div class="entry-body">
-        <p class="entry-place">Novosibirsk, Russia (visit)</p>
+        <p class="entry-place">Novosibirsk, Russia</p>
       </div>
     </div>
 
@@ -271,7 +271,7 @@ function buildSquiggle(){
   requestAnimationFrame(()=>{
     const svgTop=svg.getBoundingClientRect().top+window.scrollY;
     function update(){
-      const mid=window.scrollY+window.innerHeight*0.6;
+      const mid=window.scrollY+window.innerHeight*0.85;
       const progress=Math.max(0,Math.min(1,(mid-svgTop)/h));
       lit.style.strokeDashoffset=len-(progress*len);
     }
