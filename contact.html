@@ -23,31 +23,23 @@
   .page-title {
     font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:700;
     font-size:clamp(4rem,10vw,9rem); line-height:1;
-    text-transform:lowercase; color:var(--white); margin-bottom:2rem;
+    text-transform:lowercase; color:var(--white); margin-bottom:2.5rem;
   }
 
-  /* "if you are..." block styled like the hero keywords */
-  .if-you {
-    display:flex; flex-direction:column; gap:0.5rem;
-    margin-bottom:3rem;
-  }
-  .if-row {
-    font-size:0.7rem; letter-spacing:0.18em; text-transform:lowercase;
-    color:#666; font-weight:300;
-  }
-  .if-row::before { content:'— '; color:#333; }
+  .intro { display:flex; flex-direction:column; gap:0.6rem; margin-bottom:3.5rem; }
 
-  .dont-be {
-    font-size:0.7rem; letter-spacing:0.25em; text-transform:lowercase;
-    color:#555; font-weight:300; margin-bottom:0.5rem;
+  .intro-line {
+    font-size:0.75rem; letter-spacing:0.2em; text-transform:lowercase;
+    color:#888; font-weight:300;
   }
+
   .always-as {
-    font-size:0.7rem; letter-spacing:0.25em; text-transform:lowercase;
-    color:#888; font-weight:300; margin-bottom:3.5rem;
+    font-family:'Inter',sans-serif; font-style:normal; font-weight:300;
+    font-size:1rem; text-transform:lowercase;
+    color:#666; letter-spacing:0.2em; margin-bottom:3.5rem;
   }
-  .always-as .name-pink { color:var(--pink); }
+  .always-as .name-pink { color:var(--pink); font-weight:700; letter-spacing:0.05em; }
 
-  /* links — no numbers */
   .links-stack { display:flex; flex-direction:column; gap:0; }
   .social-row {
     display:flex; align-items:center; justify-content:space-between;
@@ -89,14 +81,11 @@
 <main>
   <h1 class="page-title fade-in">find me</h1>
 
-  <div class="if-you fade-in">
-    <span class="if-row">you have experience abroad</span>
-    <span class="if-row">you love music or creating things</span>
-    <span class="if-row">you're a fellow third culture kid</span>
-    <span class="if-row">you just feel like connecting</span>
+  <div class="intro fade-in">
+    <span class="intro-line">if something resonated.</span>
+    <span class="intro-line">don't be a stranger.</span>
   </div>
 
-  <p class="dont-be fade-in">don't be a stranger.</p>
   <p class="always-as fade-in">always as <span class="name-pink">fydoer</span></p>
 
   <div class="links-stack fade-in">
