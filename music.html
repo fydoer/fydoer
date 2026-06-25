@@ -90,8 +90,29 @@
   .song-hint { font-size:0.6rem; letter-spacing:0.2em; text-transform:lowercase; color:var(--pink); margin-top:0.4rem; }
   .song-hint.playing { color:var(--pink); }
 
-  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
-  .fade-in.visible { opacity:1; transform:none; }
+  /* volume slider */
+  .volume-wrap {
+    position:fixed; right:2rem; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:0.8rem; z-index:200;
+  }
+  .volume-label { font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:#666; writing-mode:vertical-rl; }
+  .volume-slider {
+    -webkit-appearance:none; appearance:none;
+    writing-mode:vertical-lr; direction:rtl;
+    width:2px; height:100px; background:#333;
+    outline:none; border-radius:2px; cursor:pointer;
+  }
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance:none; appearance:none;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--white); cursor:pointer;
+    transition:background 0.2s;
+  }
+  .volume-slider::-webkit-slider-thumb:hover { background:var(--pink); }
+  .volume-slider::-moz-range-thumb {
+    width:12px; height:12px; border-radius:50%;
+    background:var(--white); cursor:pointer; border:none;
+  }
 
   @media(max-width:700px) {
     .page-header { padding-left:1.8rem; padding-right:1.8rem; }
@@ -109,6 +130,11 @@
   <a href="music.html" class="active">music</a>
   <a href="contact.html">contact</a>
 </nav>
+
+<div class="volume-wrap">
+  <span class="volume-label">vol</span>
+  <input class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.8" id="volumeSlider"/>
+</div>
 
 <div class="page-header fade-in">
   <h1 class="page-title">hear me out...</h1>
@@ -148,7 +174,7 @@
       <p class="song-title">old bestfriend</p>
       <p class="song-hint">hover to listen</p>
     </div>
-    <audio loop><source src="old bestfriend.mp3" type="audio/mpeg"/></audio>
+    <audio loop><source src="old bestfriend demo.mp3" type="audio/mpeg"/></audio>
   </div>
 
   <div class="vinyl-card fade-in">
@@ -173,6 +199,11 @@
 <script>
   const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('visible'); }),{threshold:0.08});
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  const volumeSlider = document.getElementById('volumeSlider');
+  volumeSlider.addEventListener('input', () => {
+    document.querySelectorAll('audio').forEach(a => a.volume = volumeSlider.value);
+  });
 
   document.querySelectorAll('.vinyl-card').forEach(card => {
     const disc = card.querySelector('.vinyl-disc');
