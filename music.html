@@ -164,7 +164,7 @@
       <p class="song-title">hidden gun</p>
       <p class="song-hint">click to listen</p>
     </div>
-    <audio loop><source src="hidden gun demo.mp3" type="audio/mpeg"/></audio>
+    <audio><source src="hidden gun demo.mp3" type="audio/mpeg"/></audio>
   </div>
 
   <div class="vinyl-card fade-in">
@@ -181,7 +181,7 @@
       <p class="song-title">old bestfriend</p>
       <p class="song-hint">click to listen</p>
     </div>
-    <audio loop><source src="old bestfriend demo.mp3" type="audio/mpeg"/></audio>
+    <audio><source src="old bestfriend demo.mp3" type="audio/mpeg"/></audio>
   </div>
 
   <div class="vinyl-card fade-in">
@@ -198,7 +198,7 @@
       <p class="song-title">somewhere over the rainbow (cover)</p>
       <p class="song-hint">click to listen</p>
     </div>
-    <audio loop><source src="somewhere over the rainbow.mp3" type="audio/mpeg"/></audio>
+    <audio><source src="somewhere over the rainbow.mp3" type="audio/mpeg"/></audio>
   </div>
 
 </div>
@@ -218,7 +218,14 @@
     const audio = card.querySelector('audio');
     audio.volume = volumeSlider.value;
 
-    card.addEventListener('click', () => {
+          audio.addEventListener('ended', () => {
+        disc.classList.remove('spinning');
+        hint.textContent = 'click to listen';
+        card.classList.remove('playing');
+        audio.currentTime = 0;
+      });
+
+      card.addEventListener('click', () => {
       const isPlaying = !audio.paused;
 
       // stop all others
