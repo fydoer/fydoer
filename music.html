@@ -34,7 +34,11 @@
   .vinyl-card {
     display:flex; flex-direction:column; align-items:center; gap:1.5rem;
     cursor:pointer; user-select:none;
+    transition:transform 0.3s ease;
   }
+  .vinyl-card:hover { transform:translateY(-8px) scale(1.04); }
+  .vinyl-card.playing { transform:translateY(-12px) scale(1.06); }
+
   .vinyl-outer { position:relative; width:220px; height:220px; }
 
   .vinyl-disc {
@@ -83,12 +87,11 @@
     transform-origin:top center; transform:rotate(22deg);
     transition:transform 0.4s ease; border-radius:1px;
   }
-  .vinyl-card:hover .needle { transform:rotate(10deg); }
+  .vinyl-card:hover .needle, .vinyl-card.playing .needle { transform:rotate(10deg); }
 
   .song-info { text-align:center; }
   .song-title { font-size:0.85rem; color:var(--white); font-weight:300; margin-bottom:0.3rem; letter-spacing:0.03em; }
   .song-hint { font-size:0.6rem; letter-spacing:0.2em; text-transform:lowercase; color:var(--pink); margin-top:0.4rem; }
-  .song-hint.playing { color:var(--pink); }
 
   /* volume slider */
   .volume-wrap {
@@ -114,10 +117,14 @@
     background:var(--white); cursor:pointer; border:none;
   }
 
+  .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease,transform 0.7s ease; }
+  .fade-in.visible { opacity:1; transform:none; }
+
   @media(max-width:700px) {
     .page-header { padding-left:1.8rem; padding-right:1.8rem; }
     .vinyls-container { padding:2rem 1.8rem 6rem; gap:3rem; }
     nav { padding:1.2rem 1.8rem; gap:1.5rem; }
+    .volume-wrap { display:none; }
   }
 </style>
 </head>
@@ -155,7 +162,7 @@
     </div>
     <div class="song-info">
       <p class="song-title">hidden gun</p>
-      <p class="song-hint">hover to listen</p>
+      <p class="song-hint">click to listen</p>
     </div>
     <audio loop><source src="hidden gun demo.mp3" type="audio/mpeg"/></audio>
   </div>
@@ -172,7 +179,7 @@
     </div>
     <div class="song-info">
       <p class="song-title">old bestfriend</p>
-      <p class="song-hint">hover to listen</p>
+      <p class="song-hint">click to listen</p>
     </div>
     <audio loop><source src="old bestfriend demo.mp3" type="audio/mpeg"/></audio>
   </div>
@@ -189,7 +196,7 @@
     </div>
     <div class="song-info">
       <p class="song-title">somewhere over the rainbow (cover)</p>
-      <p class="song-hint">hover to listen</p>
+      <p class="song-hint">click to listen</p>
     </div>
     <audio loop><source src="somewhere over the rainbow.mp3" type="audio/mpeg"/></audio>
   </div>
@@ -209,27 +216,26 @@
     const disc = card.querySelector('.vinyl-disc');
     const hint = card.querySelector('.song-hint');
     const audio = card.querySelector('audio');
-    card.addEventListener('mouseenter', () => {
-      // stop all other audio first
+    audio.volume = volumeSlider.value;
+
+    card.addEventListener('click', () => {
+      const isPlaying = !audio.paused;
+
+      // stop all others
       document.querySelectorAll('.vinyl-card').forEach(c => {
-        if (c !== card) {
-          c.querySelector('.vinyl-disc').classList.remove('spinning');
-          c.querySelector('.song-hint').textContent = 'hover to listen';
-          c.querySelector('.song-hint').classList.remove('playing');
-          const a = c.querySelector('audio');
-          a.pause(); a.currentTime = 0;
-        }
+        c.querySelector('.vinyl-disc').classList.remove('spinning');
+        c.querySelector('.song-hint').textContent = 'click to listen';
+        c.classList.remove('playing');
+        const a = c.querySelector('audio');
+        a.pause(); a.currentTime = 0;
       });
-      disc.classList.add('spinning');
-      hint.textContent = '♪ playing';
-      hint.classList.add('playing');
-      audio.play().catch(()=>{});
-    });
-    card.addEventListener('mouseleave', () => {
-      disc.classList.remove('spinning');
-      hint.textContent = 'hover to listen';
-      hint.classList.remove('playing');
-      audio.pause(); audio.currentTime = 0;
+
+      if (!isPlaying) {
+        disc.classList.add('spinning');
+        hint.textContent = '♪ playing — click to stop';
+        card.classList.add('playing');
+        audio.play().catch(()=>{});
+      }
     });
   });
 </script>
